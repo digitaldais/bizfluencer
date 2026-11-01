@@ -1283,6 +1283,37 @@
   .mb-1 { margin-bottom: 1rem; }
   .mb-2 { margin-bottom: 2rem; }
   .full-width-btn { width: 100%; display: block; text-align: center; }
+  /* Promo bar: launch offer countdown (hides itself once the offer ends) */
+  #promo-bar {
+    position: fixed;
+    top: 3px; left: 0; right: 0;
+    height: 44px;
+    background: var(--highlight);
+    color: var(--surface);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 0 1rem;
+    font-family: var(--font-head);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  #promo-bar strong { font-weight: 800; }
+  #promo-bar .pb-timer { font-weight: 800; font-variant-numeric: tabular-nums; background: rgba(244,239,232,0.2); padding: 0.2rem 0.7rem; border-radius: 100px; }
+  #promo-bar .pb-timer b { font-weight: 900; }
+  #promo-bar .pb-btn { background: var(--surface); color: var(--ink); padding: 0.3rem 0.95rem; border-radius: 100px; font-weight: 800; font-size: 0.8rem; }
+  #promo-bar .pb-btn:hover { background: var(--accent); }
+  html:not(.offer-ended) #main-nav { top: 47px; }
+  html:not(.offer-ended) #hero { padding-top: calc(9rem + 44px); }
+  @media (max-width: 900px) { #promo-bar .pb-detail { display: none; } }
+  @media (max-width: 600px) {
+    #promo-bar { gap: 0.6rem; font-size: 0.74rem; padding: 0 0.5rem; }
+    #promo-bar .pb-btn { display: none; }
+    #promo-bar .pb-timer { padding: 0.2rem 0.5rem; }
+    html:not(.offer-ended) #hero { padding-top: calc(7rem + 44px); }
+  }
   /* Launch offer: hidden automatically once the deadline passes (see JS) */
   .offer-ended .offer-on { display: none !important; }
   html:not(.offer-ended) .offer-off { display: none !important; }
@@ -1336,6 +1367,11 @@
 <!-- =========================================
      NAV
 ========================================= -->
+<div id="promo-bar" class="offer-on" role="region" aria-label="Launch offer">
+  <span class="pb-text"><strong>£200 off ends Sunday 8 Nov</strong><span class="pb-detail"> - join for £1047 plus a bonus 1:1 Accelerate Call (worth £449)</span></span>
+  <span class="pb-timer" aria-label="Time left on the launch offer"><b id="pb-days">--</b>d <b id="pb-hours">--</b>h <b id="pb-mins">--</b>m <b id="pb-secs">--</b>s</span>
+  <a class="pb-btn" href="https://digitaldais.thrivecart.com/bizfluencer/">Enrol now</a>
+</div>
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-logo">Digital <span>Dais</span></div>
   <ul class="nav-links" id="nav-links">
@@ -1359,7 +1395,7 @@
         <div class="label-tag">12-Week Live Group Programme</div>
         <h1>Your Instagram posts are getting seen.<br><em>It's time they got you paid.</em></h1>
         <p class="hero-subhead">BIZFLUENCER™ is a 12-week live group programme that teaches female service providers the exact method to turn their Instagram into a steady source of high-ticket enquiries - without posting daily or needing a big following.</p>
-        <p class="hero-promise">More high-ticket enquiries, and better clients, within 30 days of using The Bizfluencer™ Method.</p>
+        <p class="hero-promise">More high-ticket enquiries within 30 days of using The Bizfluencer™ Method.</p>
         <div class="hero-ctas">
           <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary">Enrol now</a>
           <a href="#offer" class="btn btn-outline">See what's inside</a>
@@ -1398,22 +1434,18 @@
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-inner">
     <span>real enquiries</span><span>•</span>
-    <span>better clients</span><span>•</span>
     <span>the bizfluencer™ method</span><span>•</span>
     <span>12 weeks</span><span>•</span>
     <span>live support</span><span>•</span>
     <span>real enquiries</span><span>•</span>
-    <span>better clients</span><span>•</span>
     <span>the bizfluencer™ method</span><span>•</span>
     <span>12 weeks</span><span>•</span>
     <span>live support</span><span>•</span>
     <span>real enquiries</span><span>•</span>
-    <span>better clients</span><span>•</span>
     <span>the bizfluencer™ method</span><span>•</span>
     <span>12 weeks</span><span>•</span>
     <span>live support</span><span>•</span>
     <span>real enquiries</span><span>•</span>
-    <span>better clients</span><span>•</span>
     <span>the bizfluencer™ method</span><span>•</span>
     <span>12 weeks</span><span>•</span>
     <span>live support</span><span>•</span>
@@ -2267,6 +2299,7 @@
       root.classList.remove('pre-open');
       unlockButtons();
       renderCountdown(offerDeadline, ['fa-days', 'fa-hours', 'fa-mins', 'fa-secs']);
+      renderCountdown(offerDeadline, ['pb-days', 'pb-hours', 'pb-mins', 'pb-secs']);
     }
     if (now > offerDeadline) { root.classList.add('offer-ended'); }
   }
