@@ -535,7 +535,9 @@
   #mechanism h2 { color: var(--surface); text-wrap: balance; }
   #mechanism .label-tag { background: var(--accent); color: var(--ink); }
   .mechanism-intro { color: rgba(244,239,232,0.85); margin-bottom: 2rem; }
+  .mechanism-intro { margin-top: 1.75rem; }
   .mechanism-intro p { margin-bottom: 1rem; }
+  .mechanism-intro p:first-child { font-size: 1.25rem; font-weight: 600; color: var(--surface); }
   .mechanism-proof-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1332,6 +1334,23 @@
     font-size: 0.9rem;
     font-weight: 500;
   }
+
+  /* =========================================
+     RESULTS BANNER (rolling total) + STATEMENT BAND
+  ========================================= */
+  .results-banner { background: var(--ink); text-align: center; padding: 4rem 0 4.25rem; overflow: hidden; }
+  .rb-label { font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .rb-number { font-family: var(--font-head); font-weight: 900; color: var(--surface); font-size: clamp(2.8rem, 13vw, 6.5rem); line-height: 1; display: inline-flex; align-items: flex-end; justify-content: center; font-variant-numeric: tabular-nums; }
+  .rb-number .rb-fixed { display: inline-block; height: 1em; line-height: 1; color: var(--accent); }
+  .rb-digit { display: inline-block; height: 1em; overflow: hidden; line-height: 1; }
+  .rb-strip { display: block; will-change: transform; transform: translateY(0); }
+  .rb-strip span { display: block; height: 1em; line-height: 1; text-align: center; }
+  .rb-sub { margin-top: 1.1rem; color: rgba(244,239,232,0.75); font-size: 1rem; }
+  .only-strategy { background: var(--primary-dark); text-align: center; padding: 5.5rem 0; }
+  .only-strategy h2 { color: var(--surface); font-size: clamp(2rem, 6.5vw, 4.2rem); font-weight: 900; text-wrap: balance; max-width: 900px; margin: 0 auto 1.25rem; }
+  .only-strategy h2 em { color: var(--accent); font-style: italic; }
+  .only-strategy p { color: rgba(244,239,232,0.85); font-size: 1.1rem; max-width: 560px; margin: 0 auto; }
+  @media (prefers-reduced-motion: reduce) { .rb-strip { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -1395,7 +1414,7 @@
         <div class="label-tag">12-Week Live Group Programme</div>
         <h1>Your Instagram posts are getting seen.<br><em>It's time they got you paid.</em></h1>
         <p class="hero-subhead">BIZFLUENCER™ is a 12-week live group programme that teaches female service providers the exact method to turn their Instagram into a steady source of high-ticket enquiries - without posting daily or needing a big following.</p>
-        <p class="hero-promise">More high-ticket enquiries within 30 days of using The Bizfluencer™ Method.</p>
+        <p class="hero-promise"><strong>The programme promise:</strong> More high-ticket enquiries within 30 days of using The Bizfluencer™ Method.</p>
         <div class="hero-ctas">
           <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary">Enrol now</a>
           <a href="#offer" class="btn btn-outline">See what's inside</a>
@@ -1403,7 +1422,7 @@
         <div class="door-note preopen-only">Doors open permanently on Monday 2 November 2026 at 9am UK time - have a good read in the meantime.</div>
         <div class="stat-strip" style="margin-top:2rem;">
           <div class="stat-item">
-            <strong>£39,000+</strong>
+            <strong data-biz-total>£39,000+</strong>
             <span>generated using the method this year</span>
           </div>
           <div class="stat-item">
@@ -1466,19 +1485,14 @@
       </div>
       <div class="problem-text reveal">
         <h2>Sound familiar?</h2>
-        <p>You spend your afternoon on a Reel - filming, re-filming, rewriting the caption three times. You post it. Your mum likes it within four minutes. Your biz bestie leaves a fire emoji. And then nothing.</p>
-        <p>Your DMs are quiet, and all those likes have paid zero bills.</p>
-        <p>You're f*cking brilliant at your service. You just haven't been taught how to make Instagram sell it FOR you (yet).</p>
-        <p>Maybe you get the odd enquiry but they ghost the moment you send your prices. Maybe the likes and comments just come from people who never book.</p>
-        <div class="problem-quotes">
-          <p class="problem-quotes-caption" style="font-style:normal;font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6a7148;margin-bottom:0.75rem;">Things clients said before joining BIZFLUENCER™</p>
-          <p>"It's just not converting."</p>
-          <p>"I don't know what to post."</p>
-          <p>"The results are amazing - why don't they book?"</p>
-          <p>"Posting feels like buying a lottery ticket. None of them are winning."</p>
-        </div>
-        <p>You started your business for freedom, not to wonder why your content feels <em>off</em> when you can't explain why.</p>
-        <p>Your best clients didn't find you on Instagram, they came through a referral or someone who knew you in real life. Some nights you lie there wondering what you'd do if those referrals went quiet - because you'd feel it, and so would your bank account.</p>
+        <p>You open Instagram and the guilt hits before you've posted anything. Should it be a Reel? A carousel? What's the right ratio? Is it even worth it if the algorithm is going to bury it anyway?</p>
+        <p>So you post from a place of panic, hoping one of them lands you a client. Your mum likes it within four minutes. Your biz bestie leaves a fire emoji. And then nothing.</p>
+        <p>Your DMs are quiet, and any likes that you racked up, have paid zero bills.</p>
+        <p>Maybe you get the odd enquiry but they ghost the moment you send your prices. Maybe you're getting likes and comments from people who never book. Maybe you're posting from a place of panic, hoping one of them lands a client. Maybe everyone keeps booking your cheapest services and you're fed up.</p>
+        <p>You launched your business for freedom, and to do the work that lights you up. Not to become a full-time content creator.</p>
+        <p>And every week you put out content that flops, you spend a little more time wondering if your prices are the problem, your niche is too niche, or whether you're just one slow month away from re-downloading the dreaded Indeed app.</p>
+        <p>Your best clients didn't find you on Instagram, they came through a referral or someone who knew you in real life.</p>
+        <p>Some nights you lie there wondering what you'd do if those referrals went quiet - because you'd feel it, and so would your bank account.</p>
         <p>You're not a beginner. You've had mentors, you know what a content pillar is, you've probably bought the course (or three) - but this was never about needing more tactics.</p>
         <p>Your content is written from the inside out - credible, professional, polished, with the personality edited out. So people lurk, watch and save your posts but never feel enough of you to tip from lurking to buying. And the courses taught you to educate, which grows an audience but doesn't bring in enquiries. Those are two different jobs.</p>
         <p>None of this is you, your offer, your prices or your niche. It's the strategy, and strategy can be fixed.</p>
@@ -1516,38 +1530,11 @@
       <h2 style="color:var(--surface);max-width:680px;">The Bizfluencer™ Method: the real you, in front of the right person, at the right stage</h2>
     </div>
     <div class="mechanism-intro reveal">
-      <p>Most content programmes teach tactics. Post this type of content. Use this hook. Try this audio.</p>
-      <p>None of that works if the person writing the posts hasn't got the foundation absolutely nailed: who they are, who they're for, and which stage of the journey their ideal client is at.</p>
+      <p>Your content should be your best salesperson. Right now it's not. BIZFLUENCER™ fixes that.</p>
       <p>The Bizfluencer™ Method starts with you - your personality, your way of seeing things, the bits your best clients are obsessed with - then maps it to the four types of people in your audience, so the right content reaches the right person at the right stage. That's how enquiries start coming from people who already feel like they know you.</p>
+      <p>We take your services from something that is 'nice-to-have' for your client, to something that is an urgent need for them. No matter your niche.</p>
+      <p>The result is content that sounds like you, and speaks directly to the right person, so enquiries start coming in from people who feel like they know you - already convinced, before they've asked about your prices.</p>
     </div>
-    <div class="fourc reveal">
-      <div class="fourc-label">The 4C audience journey</div>
-      <div class="fourc-grid">
-        <div class="fourc-card"><div class="fourc-num">1</div><h4>Cold</h4><p>A stranger who's never heard of you.</p><p class="fourc-need">Needs a reason to follow.</p></div>
-        <div class="fourc-card"><div class="fourc-num">2</div><h4>Curious</h4><p>Watching, lurking, saving.</p><p class="fourc-need">Needs to feel who you are before they trust you.</p></div>
-        <div class="fourc-card"><div class="fourc-num">3</div><h4>Connected</h4><p>Likes you, wants what you offer, waiting for the right time.</p><p class="fourc-need">Needs an invitation, not another tip.</p></div>
-        <div class="fourc-card"><div class="fourc-num">4</div><h4>Client</h4><p>Already loves you.</p><p class="fourc-need">Needs to keep seeing your content so they rebook and refer.</p></div>
-      </div>
-      <p class="fourc-fan">Then the FAN content framework tells you what to post for each stage: <strong>Find</strong> (reach new people), <strong>Align</strong> (let them get to know the real you) and <strong>Need</strong> (invite the ready ones to book). Module 2 builds both out for your business.</p>
-    </div>
-    <div class="mechanism-proof-cards reveal">
-      <div class="mech-proof-card">
-        <div class="name">Ellie - Dubsado Specialist</div>
-        <div class="role">Cold to sold</div>
-        <p>Within days of a live IG Profile Workshop, a stranger typed "Dubsado" into Instagram search, found Ellie at the top, booked a discovery call, and signed a £1,449 Full Setup - no hesitation on price. Ellie went on to make her investment back 4x and hit her first ever fully booked month.</p>
-      </div>
-      <div class="mech-proof-card">
-        <div class="name">Crystal - Sobriety Coach</div>
-        <div class="role">Curious to connected</div>
-        <p>She came in with zero Instagram enquiries and content that felt like throwing spaghetti at the wall. Two months later she ran a free workshop with 29 sign-ups, nearly triple her previous best and mostly brand new to her world. One of them signed as a 1:1 client and said she felt really aligned with Crystal's messaging. Crystal has even created so much demand she launched her own group programme. So far she has made her investment back 2.7x.</p>
-      </div>
-      <div class="mech-proof-card">
-        <div class="name">Becky H - Aesthetics Practitioner</div>
-        <div class="role">Connected to client</div>
-        <p>She reworked her profile and content around where her audience actually was. Month one enquiries more than doubled, from 5 to 11, and she converted them. £3,100+ in her first two months, and no more ghosting.</p>
-      </div>
-    </div>
-    <p class="mechanism-footer reveal">The method works because every post is written as the real you, for the person who needs to see it right now - so the enquiries that come in are warm before they've even asked about your prices.</p>
     <div class="mechanism-cta reveal">
       <a href="#offer" class="btn btn-secondary">See what's inside the programme</a>
     </div>
@@ -1640,6 +1627,16 @@
     <div class="text-center mt-2 reveal">
       <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary">Enrol now - see everything above in action</a>
     </div>
+  </div>
+</section>
+<!-- =========================================
+     ONLY CONTENT STRATEGY STATEMENT
+========================================= -->
+<section class="only-strategy" data-section="only-strategy">
+  <div class="container-narrow reveal">
+    <div class="label-tag label-tag-highlight" style="margin-bottom:1.5rem;">Timeless</div>
+    <h2>This is the only content strategy <em>you will ever need.</em></h2>
+    <p>The method is timeless and keeps working for the lifetime of your biz.</p>
   </div>
 </section>
 <!-- =========================================
@@ -1746,20 +1743,6 @@
         <p>Influencers are wildly successful just from building a personal brand. They can move thousands of units for companies just by being themselves.</p>
         <p>I realised I was on to something - if we build our personal brands in our business with the same approach, we'll land more clients/bookings/sales. I taught everything I know to 1:1 coaching clients, then built it in to a timeless 6-step method that every service provider can use in their business.</p>
         <p>Clients so far have come from 9 completely different niches, plus myself - 10 in total. All saw measurable movement. Several had bought courses before and described this as the first time things actually landed.</p>
-        <div class="story-founder-stat">
-          <div class="founder-stat-item">
-            <strong>£39,000+</strong>
-            <span>generated this year using the Bizfluencer™ Method</span>
-          </div>
-          <div class="founder-stat-item">
-            <strong>10</strong>
-            <span>different niches covered so far</span>
-          </div>
-          <div class="founder-stat-item">
-            <strong>12 wks</strong>
-            <span>live support the entire way through</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1781,6 +1764,16 @@
     <span>real feedback</span><span>•</span>
   </div>
 </div>
+<!-- =========================================
+     RESULTS BANNER (update the number: BIZ_TOTAL in the script)
+========================================= -->
+<section id="results-banner" class="results-banner" data-section="results-banner">
+  <div class="container reveal">
+    <div class="rb-label">Generated so far using the Bizfluencer™ Method</div>
+    <div class="rb-number" id="rb-number" role="img" aria-label="£39,000+">£39,000+</div>
+    <div class="rb-sub">and counting - this number is updated regularly</div>
+  </div>
+</section>
 <!-- =========================================
      PROOF
 ========================================= -->
@@ -1851,7 +1844,7 @@
         <div class="testimonial-role">Dubsado Specialist</div>
         <div class="testimonial-result">
           <span class="result-number">4x ROI</span>
-          Under 600 followers at start. Two days after the IG Profile Workshop, a stranger typed "Dubsado" into Instagram search, found Ellie at the top, booked a call, and signed a £1,449 Full Setup - no hesitation on price. Enquiries climbed from crickets to multiple every month for three consecutive months. Hit her first ever fully booked month.
+          Under 600 followers at start. Two days after the IG Profile Workshop, a stranger typed "Dubsado" into Instagram search, found Ellie at the top, booked a call, and signed a £1,500 Full Setup - no hesitation on price. Enquiries climbed from crickets to multiple every month for three consecutive months. Hit her first ever fully booked month.
         </div>
       </div>
       <!-- Crystal -->
@@ -2037,7 +2030,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          Following size is not the variable that determines results - strategy is. Ellie had under 600 followers when she joined the group. Within days of reworking her profile, someone typed "Dubsado" into Instagram search, found Ellie as the top result, and signed a £1,449 package without hesitation. Becky started with 298 followers and is now at 2,300+ aligned followers from organic content, with paid digital products released and her first client for a brand new service. The Bizfluencer™ Method is built around getting the right content to the right person at the right stage - not follower count.
+          Following size is not the variable that determines results - strategy is. Ellie had under 600 followers when she joined the group. Within days of reworking her profile, someone typed "Dubsado" into Instagram search, found Ellie as the top result, and signed a £1,500 package without hesitation. Becky started with 298 followers and is now at 2,300+ aligned followers from organic content, with paid digital products released and her first client for a brand new service. The Bizfluencer™ Method is built around getting the right content to the right person at the right stage - not follower count.
         </div>
       </div>
       <div class="faq-item">
@@ -2170,6 +2163,55 @@
      JAVASCRIPT
 ========================================= -->
 <script>
+
+  // =========================================
+  // GENERATED-SO-FAR TOTAL: change this one number and it updates the hero stat and the rolling banner
+  // =========================================
+  var BIZ_TOTAL = 39000;
+  (function() {
+    var label = '£' + BIZ_TOTAL.toLocaleString('en-GB') + '+';
+    document.querySelectorAll('[data-biz-total]').forEach(function(el) { el.textContent = label; });
+    var box = document.getElementById('rb-number');
+    if (!box) return;
+    box.setAttribute('aria-label', label);
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { box.textContent = label; return; }
+    box.textContent = '';
+    var strips = [];
+    var digitCount = label.replace(/[^0-9]/g, '').length, di = 0;
+    label.split('').forEach(function(ch) {
+      var span = document.createElement('span');
+      if (/[0-9]/.test(ch)) {
+        span.className = 'rb-digit';
+        var strip = document.createElement('span');
+        strip.className = 'rb-strip';
+        for (var n = 0; n < 40; n++) { var d = document.createElement('span'); d.textContent = n % 10; strip.appendChild(d); }
+        span.appendChild(strip);
+        strips.push({ el: strip, digit: parseInt(ch, 10), idx: di++ });
+      } else {
+        span.className = 'rb-fixed';
+        span.textContent = ch;
+      }
+      box.appendChild(span);
+    });
+    var started = false;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          strips.forEach(function(st) {
+            // left digits settle first; each one spins through extra full turns before landing
+            var turns = 3;
+            var target = turns * 10 + st.digit;
+            st.el.style.transition = 'transform ' + (1.6 + st.idx * 0.15) + 's cubic-bezier(0.16, 1, 0.3, 1) ' + (st.idx * 0.22) + 's';
+            st.el.style.transform = 'translateY(-' + target + 'em)';
+          });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(box);
+  })();
 (function() {
   'use strict';
   // =========================================
