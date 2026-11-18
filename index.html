@@ -2350,10 +2350,10 @@
   window.ddOnPixel = function () {
     if (typeof fbq === 'function') { fbq('track', 'ViewContent', { content_name: 'BIZFLUENCER' }); }
   };
-  // Join button clicks (checkout) - only tracked if the pixel is loaded
+  // Enrol button clicks - sent as a custom event so it doesn't clash with ThriveCart's InitiateCheckout
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[href*="thrivecart.com"]') : null;
-    if (a && typeof fbq === 'function') { fbq('track', 'InitiateCheckout', { content_name: 'BIZFLUENCER' }); }
+    if (a && typeof fbq === 'function') { fbq('trackCustom', 'EnrolClick', { content_name: 'BIZFLUENCER' }); }
   });
 </script>
 <style>
