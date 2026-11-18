@@ -654,7 +654,6 @@
   .checklist-item:focus-visible,
   .btn:focus-visible,
   .nav-cta:focus-visible,
-  .exit-popup-close:focus-visible,
   a:focus-visible {
     outline: 2px solid var(--highlight);
     outline-offset: 2px;
@@ -1233,50 +1232,6 @@
   footer p { font-size: 0.82rem; color: rgba(244,239,232,0.55); }
   footer strong { color: var(--accent); }
   /* =========================================
-     EXIT INTENT POPUP
-  ========================================= */
-  #exit-popup {
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(75,70,38,0.6);
-    backdrop-filter: blur(4px);
-  }
-  #exit-popup.show { display: flex; }
-  .exit-popup-inner {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 2.5rem;
-    max-width: 480px;
-    width: 90%;
-    position: relative;
-    border-top: 4px solid var(--highlight);
-    text-align: center;
-    animation: popIn 0.35s ease;
-  }
-  @keyframes popIn {
-    from { transform: scale(0.88); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .exit-popup-close {
-    position: absolute;
-    top: 1rem; right: 1.25rem;
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    color: var(--ink-light);
-    line-height: 1;
-    transition: color 0.2s;
-  }
-  .exit-popup-close:hover { color: var(--ink); }
-  .exit-popup-inner h3 { font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--primary); }
-  .exit-popup-inner p { font-size: 0.93rem; color: var(--ink-light); margin-bottom: 1.5rem; line-height: 1.6; }
-  .exit-popup-inner .btn { width: 100%; margin-bottom: 0.75rem; }
-  .exit-popup-dismiss { font-size: 0.8rem; color: var(--ink-light); cursor: pointer; text-decoration: underline; display: block; }
-  /* =========================================
      UTILITY
   ========================================= */
   .text-center { text-align: center; }
@@ -1368,21 +1323,6 @@
 </script>
 <!-- SCROLL PROGRESS -->
 <div id="scroll-bar"></div>
-<!-- =========================================
-     EXIT INTENT POPUP
-========================================= -->
-<div id="exit-popup" role="dialog" aria-modal="true" aria-label="Wait - before you go">
-  <div class="exit-popup-inner">
-    <button class="exit-popup-close" id="exit-close" aria-label="Close">&times;</button>
-    <div class="label-tag label-tag-highlight offer-on" style="margin-bottom:1rem;">Launch offer ends 8 Nov</div>
-    <h3>You're brilliant at the work. Instagram hasn't been taught to sell it for you (yet).</h3>
-    <p>BIZFLUENCER™ is the 12-week programme that gives you the method, the live support, and the real-time feedback to turn your content into a steady source of high-ticket enquiries - starting within 30 days.</p>
-    <p class="offer-on" style="font-size:0.85rem;color:var(--highlight);font-weight:600;margin-bottom:1.25rem;">Launch price: £1047 (saving £200) plus a bonus 1:1 Accelerate Call (worth £449). Payment plans available.</p>
-    <p class="offer-off" style="font-size:0.85rem;color:var(--highlight);font-weight:600;margin-bottom:1.25rem;">£1247. Payment plans available.</p>
-    <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary full-width-btn">Enrol now</a>
-    <span class="exit-popup-dismiss" id="exit-dismiss">No thanks, I'll pay more later</span>
-  </div>
-</div>
 <!-- =========================================
      NAV
 ========================================= -->
@@ -1488,7 +1428,7 @@
         <p>You open Instagram and the guilt hits before you've posted anything. Should it be a Reel? A carousel? What's the right ratio? Is it even worth it if the algorithm is going to bury it anyway?</p>
         <p>So you post from a place of panic, hoping one of them lands you a client. Your mum likes it within four minutes. Your biz bestie leaves a fire emoji. And then nothing.</p>
         <p>Your DMs are quiet, and any likes that you racked up, have paid zero bills.</p>
-        <p>Maybe you get the odd enquiry but they ghost the moment you send your prices. Maybe everyone keeps booking your cheapest services and you're fed up.</p>
+        <p>Maybe you get the odd enquiry but they ghost the moment you send your prices. Maybe you're getting likes and comments from people who never book. Maybe you're posting from a place of panic, hoping one of them lands a client. Maybe everyone keeps booking your cheapest services and you're fed up.</p>
         <p>You launched your business for freedom, and to do the work that lights you up. Not to become a full-time content creator.</p>
         <p>And every week you put out content that flops, you spend a little more time wondering if your prices are the problem, your niche is too niche, or whether you're just one slow month away from re-downloading the dreaded Indeed app.</p>
         <p>Your best clients didn't find you on Instagram, they came through a referral or someone who knew you in real life.</p>
@@ -2158,6 +2098,7 @@
   <p><strong>Digital Dais</strong> - BIZFLUENCER™ 12-Week Live Group Programme</p>
   <p style="margin-top:0.5rem;"><span class="preopen-only">Doors open permanently on Monday 2 November 2026. </span><span class="offer-on">Launch offer ends 8 November 2026. </span>Join any time and start straight away.</p>
   <p style="margin-top:0.5rem;">Questions? DM me on Instagram.</p>
+  <p class="dd-legal" style="margin-top:0.75rem;font-size:0.8rem;"><a href="https://learn.digitaldais.co.uk/privacy.html">Privacy policy</a> &middot; <button type="button" data-cookie-settings>Cookie settings</button></p>
 </footer>
 <!-- =========================================
      JAVASCRIPT
@@ -2401,33 +2342,111 @@
       }
     });
   });
-  // =========================================
-  // EXIT INTENT POPUP
-  // =========================================
-  var popup = document.getElementById('exit-popup');
-  var exitClose = document.getElementById('exit-close');
-  var exitDismiss = document.getElementById('exit-dismiss');
-  var popupShown = false;
-  function showPopup() {
-    if (!popupShown) {
-      popup.classList.add('show');
-      popupShown = true;
-    }
-  }
-  function hidePopup() {
-    popup.classList.remove('show');
-  }
-  document.addEventListener('mouseleave', function(e) {
-    if (e.clientY < 50 && !popupShown) {
-      showPopup();
-    }
-  });
-  if (exitClose) exitClose.addEventListener('click', hidePopup);
-  if (exitDismiss) exitDismiss.addEventListener('click', hidePopup);
-  popup.addEventListener('click', function(e) {
-    if (e.target === popup) hidePopup();
-  });
 })();
+</script>
+
+<script>
+  // Runs once the pixel has loaded (only if the visitor accepted cookies)
+  window.ddOnPixel = function () {
+    if (typeof fbq === 'function') { fbq('track', 'ViewContent', { content_name: 'BIZFLUENCER' }); }
+  };
+  // Join button clicks (checkout) - only tracked if the pixel is loaded
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href*="thrivecart.com"]') : null;
+    if (a && typeof fbq === 'function') { fbq('track', 'InitiateCheckout', { content_name: 'BIZFLUENCER' }); }
+  });
+</script>
+<style>
+  /* Cookie banner */
+  .dd-cookie { position: fixed; inset: 0; z-index: 9999; background: rgba(75,70,38,0.6); display: none; align-items: center; justify-content: center; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .dd-cookie.show { display: flex; }
+  .dd-cookie-in { background: #f4efe8; color: #4b4626; border-radius: 18px; padding: 28px 26px 24px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3); font-size: 16px; line-height: 1.5; text-align: center; }
+  .dd-cookie p { margin: 0 0 20px; }
+  .dd-cookie a { color: #6a7148; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .dd-cookie .dd-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .dd-cookie button { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; padding: 12px 24px; border-radius: 10px; cursor: pointer; border: 2px solid #6a7148; flex: 1 1 140px; }
+  .dd-cookie .dd-accept { background: #6a7148; color: #f4efe8; }
+  .dd-cookie .dd-decline { background: transparent; color: #6a7148; }
+  .dd-cookie button:focus-visible { outline: 3px solid #ce998a; outline-offset: 2px; }
+  .dd-legal a, .dd-legal button { color: inherit; opacity: 0.9; text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+</style>
+<div class="dd-cookie" id="dd-cookie" role="dialog" aria-modal="true" aria-label="Cookie consent">
+  <div class="dd-cookie-in">
+    <p>This site uses cookies for advertising and measurement. Do you consent to cookies? See the <a href="https://learn.digitaldais.co.uk/privacy.html">privacy policy</a>.</p>
+    <div class="dd-btns">
+      <button type="button" class="dd-accept" id="dd-accept">Accept cookies</button>
+      <button type="button" class="dd-decline" id="dd-decline">Decline</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Consent-gated Meta pixel: nothing loads until the visitor accepts
+  (function () {
+    var PIXEL_ID = '2060690691990850';
+    var KEY = 'dd_cookie_choice';
+    var banner = document.getElementById('dd-cookie');
+
+    function getChoice() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function setChoice(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function clearChoice() { try { localStorage.removeItem(KEY); } catch (e) {} }
+
+    function loadPixel() {
+      if (window.__ddPixelLoaded) return;
+      window.__ddPixelLoaded = true;
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+      if (typeof window.ddOnPixel === 'function') { window.ddOnPixel(); }
+    }
+
+    function removeCookies() {
+      var names = ['_fbp', '_fbc'];
+      var host = location.hostname.split('.').slice(-3).join('.');
+      names.forEach(function (n) {
+        document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.' + host;
+      });
+    }
+
+    function setInert(on) {
+      Array.prototype.forEach.call(document.body.children, function (el) {
+        if (el === banner || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
+        if (on) { el.setAttribute('inert', ''); } else { el.removeAttribute('inert'); }
+      });
+    }
+    function show() {
+      banner.classList.add('show'); setInert(true);
+      document.body.style.overflow = 'hidden';
+      var a = document.getElementById('dd-accept'); if (a) { a.focus({ preventScroll: true }); }
+    }
+    function hide() {
+      banner.classList.remove('show'); setInert(false);
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('dd-accept').addEventListener('click', function () {
+      setChoice('accepted'); hide(); loadPixel();
+    });
+    document.getElementById('dd-decline').addEventListener('click', function () {
+      var wasLoaded = !!window.__ddPixelLoaded;
+      setChoice('declined'); hide(); removeCookies();
+      if (wasLoaded) { location.reload(); }
+    });
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); show(); });
+    });
+
+    var c = getChoice();
+    if (c === 'accepted') { loadPixel(); }
+    else if (c !== 'declined') { show(); }
+  })();
 </script>
 
 </body>
