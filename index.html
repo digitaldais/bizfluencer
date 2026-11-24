@@ -1262,14 +1262,75 @@
   #promo-bar .pb-timer b { font-weight: 900; }
   #promo-bar .pb-btn { background: var(--surface); color: var(--ink); padding: 0.3rem 0.95rem; border-radius: 100px; font-weight: 800; font-size: 0.8rem; }
   #promo-bar .pb-btn:hover { background: var(--accent); }
-  html:not(.offer-ended) #main-nav { top: 47px; }
-  html:not(.offer-ended) #hero { padding-top: calc(9rem + 44px); }
-  @media (max-width: 900px) { #promo-bar .pb-detail { display: none; } }
+  html.xmas-on #main-nav { top: 47px; }
+  html.xmas-on #hero { padding-top: calc(9rem + 44px); }
+  @media (max-width: 1150px) { #promo-bar .pb-detail { display: none; } }
+  @media (max-width: 900px) { #promo-bar .pb-ends { display: none; } }
   @media (max-width: 600px) {
     #promo-bar { gap: 0.6rem; font-size: 0.74rem; padding: 0 0.5rem; }
-    #promo-bar .pb-btn { display: none; }
+    #promo-bar .pb-btn { padding: 0.25rem 0.7rem; font-size: 0.72rem; }
+    #promo-bar .pb-long { display: none; }
     #promo-bar .pb-timer { padding: 0.2rem 0.5rem; }
-    html:not(.offer-ended) #hero { padding-top: calc(7rem + 44px); }
+    html.xmas-on #hero { padding-top: calc(7rem + 44px); }
+  }
+
+  /* Christmas offer: shows automatically until the deadline, then disappears (see JS) */
+  html:not(.xmas-on) .xmas-only { display: none !important; }
+  html.xmas-after18 .xmas-pre18 { display: none !important; }
+  #promo-bar .pb-free { font-weight: 800; }
+  .xmas-pill {
+    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.5rem;
+    background: rgba(238,207,199,0.16); border: 1px solid rgba(238,207,199,0.45);
+    color: var(--surface); border-radius: 14px; padding: 0.6rem 1rem;
+    font-size: 0.88rem; line-height: 1.4; margin: -0.75rem 0 1.75rem;
+  }
+  .xmas-pill strong { color: var(--accent); font-weight: 800; }
+  .xmas-pill a { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .xmas-card {
+    max-width: 880px; margin: 0 auto 3rem; background: var(--bg-dark); color: var(--surface);
+    border-radius: 20px; padding: 2.5rem 2rem; scroll-margin-top: 110px; position: relative; overflow: hidden;
+  }
+  .xmas-badge {
+    display: inline-block; background: var(--highlight); color: var(--surface);
+    font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 0.9rem;
+  }
+  .xmas-card h3 { color: var(--surface); font-size: 1.6rem; line-height: 1.2; margin-bottom: 0.6rem; text-wrap: balance; }
+  .xmas-card h3 em { color: var(--accent); font-style: italic; }
+  .xmas-lead { color: rgba(244,239,232,0.85); font-size: 1rem; line-height: 1.6; max-width: 640px; margin-bottom: 1.75rem; }
+  .xmas-tiles { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0.75rem; align-items: stretch; margin-bottom: 2rem; }
+  .xmas-tile {
+    background: rgba(244,239,232,0.08); border: 1px solid rgba(244,239,232,0.18);
+    border-radius: 14px; padding: 1.1rem 1rem; text-align: center;
+  }
+  .xmas-tile.xmas-tile-hero { background: var(--highlight); border-color: var(--highlight); }
+  .xmas-big { font-weight: 900; font-size: 1.7rem; line-height: 1.1; color: var(--surface); margin-bottom: 0.4rem; font-variant-numeric: tabular-nums; }
+  .xmas-small { font-size: 0.8rem; line-height: 1.4; color: rgba(244,239,232,0.85); }
+  .xmas-plus { display: flex; align-items: center; font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+  .xmas-steps { list-style: none; margin: 0 0 2rem; padding: 0; border-left: 2px solid rgba(238,207,199,0.4); }
+  .xmas-steps li { position: relative; padding: 0 0 1.1rem 1.4rem; font-size: 0.95rem; line-height: 1.5; color: rgba(244,239,232,0.88); }
+  .xmas-steps li:last-child { padding-bottom: 0; }
+  .xmas-steps li::before {
+    content: ''; position: absolute; left: -7px; top: 0.35rem; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--accent); border: 2px solid var(--bg-dark);
+  }
+  .xmas-steps li.xmas-away::before { background: var(--highlight); }
+  .xmas-steps b { display: block; color: var(--surface); font-weight: 800; }
+  .xmas-deadline { text-align: center; background: rgba(244,239,232,0.08); border-radius: 14px; padding: 1.25rem 1rem; }
+  .xmas-deadline .countdown-label { margin-bottom: 0.4rem; }
+  .xmas-deadline .xmas-nudge { font-size: 0.9rem; color: rgba(244,239,232,0.9); margin-bottom: 0.9rem; }
+  .xmas-deadline .countdown-timer { margin-bottom: 0.8rem; }
+  .xmas-deadline .countdown-sub { margin: 0 0 1.1rem; }
+  @media (max-width: 700px) {
+    .xmas-card { padding: 2rem 1.25rem; border-radius: 16px; }
+    .xmas-card h3 { font-size: 1.35rem; }
+    .xmas-tiles { grid-template-columns: 1fr; gap: 0.5rem; }
+    .xmas-plus { justify-content: center; font-size: 1.2rem; line-height: 1; }
+    .xmas-big { font-size: 1.5rem; }
+    .xmas-deadline .countdown-timer { gap: 0.35rem; flex-wrap: nowrap; }
+    .xmas-deadline .countdown-unit { min-width: 0; flex: 1; }
+    .xmas-deadline .countdown-unit .num { font-size: 1.6rem; }
+    .xmas-deadline .countdown-sep { font-size: 1.1rem; }
   }
   /* Launch offer: hidden automatically once the deadline passes (see JS) */
   .offer-ended .offer-on { display: none !important; }
@@ -1313,12 +1374,14 @@
   // Key dates (UK is on GMT / UTC+0 in November)
   window.BZ = {
     open: new Date('2026-11-01T00:00:00+00:00').getTime(), // doors are open (was Monday 2 November 2026, 9am UK)
-    end:  new Date('2026-11-08T23:59:59+00:00').getTime()  // launch offer ends: Sunday 8 November 2026, 11:59pm UK
+    end:  new Date('2026-11-08T23:59:59+00:00').getTime(), // launch offer ends: Sunday 8 November 2026, 11:59pm UK
+    xmasEnd: new Date('2026-12-18T18:00:00+00:00').getTime() // Christmas offer: last chance to join, Friday 18th December 2026, 6pm UK (GMT)
   };
   (function () {
     var c = document.documentElement.classList, now = Date.now();
     if (now < BZ.open) c.add('pre-open');
     if (now > BZ.end) c.add('offer-ended');
+    if (now <= BZ.xmasEnd) c.add('xmas-on');
   })();
 </script>
 <!-- SCROLL PROGRESS -->
@@ -1326,10 +1389,11 @@
 <!-- =========================================
      NAV
 ========================================= -->
-<div id="promo-bar" class="offer-on" role="region" aria-label="Launch offer">
-  <span class="pb-text"><strong>£200 off ends Sunday 8 Nov</strong><span class="pb-detail"> - join for £1047 plus a bonus 1:1 Accelerate Call (worth £449)</span></span>
-  <span class="pb-timer" aria-label="Time left on the launch offer"><b id="pb-days">--</b>d <b id="pb-hours">--</b>h <b id="pb-mins">--</b>m <b id="pb-secs">--</b>s</span>
-  <a class="pb-btn" href="https://digitaldais.thrivecart.com/bizfluencer/">Enrol now</a>
+<div id="promo-bar" class="xmas-only" role="region" aria-label="Christmas offer">
+  <span class="pb-text"><strong>Christmas offer</strong><span class="pb-detail"> - lock in your Q1 support now, covered until 13th April 2027</span></span>
+  <span class="pb-timer"><span class="pb-long">Join today for </span><b class="pb-free" data-xmas-free>6 weeks</b> free</span>
+  <span class="pb-ends" aria-label="Time left to join"><span style="opacity:.85;">Ends in</span> <b id="pb-days">--</b>d <b id="pb-hours">--</b>h <b id="pb-mins">--</b>m <b id="pb-secs">--</b>s</span>
+  <a class="pb-btn" href="#christmas-offer">How it works</a>
 </div>
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-logo">Digital <span>Dais</span></div>
@@ -1355,6 +1419,7 @@
         <h1>Your Instagram posts are getting seen.<br><em>It's time they got you paid.</em></h1>
         <p class="hero-subhead">BIZFLUENCER™ is a 12-week live group programme that teaches female service providers the exact method to turn their Instagram into a steady source of high-ticket enquiries - without posting daily or needing a big following.</p>
         <p class="hero-promise"><strong>The programme promise:</strong> More high-ticket enquiries within 30 days of using The Bizfluencer™ Method.</p>
+        <div class="xmas-pill xmas-only"><span><strong>Christmas offer:</strong> join today for <strong data-xmas-free>6 weeks</strong> free. Full access straight away, and your 12 weeks of support don't start counting until 5th January. Lock in your Q1 support now, covered until 13th April 2027.</span> <a href="#christmas-offer">How it works</a></div>
         <div class="hero-ctas">
           <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary">Enrol now</a>
           <a href="#offer" class="btn btn-outline">See what's inside</a>
@@ -1874,6 +1939,40 @@
       <p class="offer-on open-only">Launch offer ends Sunday 8 November 2026, 11:59pm UK time. After that, it's £1247. Payment plans available either way.</p>
       <p class="offer-off">£1247. Payment plans available.</p>
     </div>
+    <div class="xmas-card xmas-only reveal" id="christmas-offer">
+      <span class="xmas-badge">Christmas offer</span>
+      <h3>Join today for <em data-xmas-free>6 weeks</em> free</h3>
+      <p class="xmas-lead">Full access straight away, and your 12 weeks of support don't start counting until 5th January. Lock in your Q1 support now, covered until 13th April 2027. The sooner you join, the more free time you get.</p>
+      <div class="xmas-tiles">
+        <div class="xmas-tile xmas-tile-hero"><div class="xmas-big" data-xmas-free>6 weeks</div><div class="xmas-small">free if you join today. It goes down a day, every day</div></div>
+        <div class="xmas-plus" aria-hidden="true">+</div>
+        <div class="xmas-tile"><div class="xmas-big">12 weeks</div><div class="xmas-small">of support, counting from 5th January</div></div>
+        <div class="xmas-plus" aria-hidden="true">+</div>
+        <div class="xmas-tile"><div class="xmas-big">2 weeks</div><div class="xmas-small">added on the end, to give you back the time I'm away</div></div>
+      </div>
+      <ol class="xmas-steps">
+        <li><b>The day you join</b>Instant access to everything: all the modules, the custom AI tools, Slack and the live calls.</li>
+        <li class="xmas-pre18"><b>Until Friday 18th December</b>I'm here as normal (it's my last working day), so you can use the live calls and the Slack Hotline straight away.</li>
+        <li class="xmas-away"><b>19th December to 4th January</b>I'm away, so there are no live calls or Slack reviews. Your modules and AI tools stay open, so you can keep going. Don't worry, you get this time back (see the last step).</li>
+        <li><b>Tuesday 5th January</b>I'm back, and your 12 weeks officially start counting. Live calls and Slack carry on as normal.</li>
+        <li><b>Then 2 extra weeks</b>You don't lose the time I'm away. I add 2 weeks onto the end of your support to make up for it, so you're covered until 13th April 2027.</li>
+      </ol>
+      <div class="xmas-deadline">
+        <div class="countdown-label">Christmas offer ends in</div>
+        <div class="xmas-nudge">Every day you wait takes a day off your free time.</div>
+        <div class="countdown-timer">
+          <div class="countdown-unit"><span class="num" id="xm-days">--</span><span class="unit-label">days</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="num" id="xm-hours">--</span><span class="unit-label">hrs</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="num" id="xm-mins">--</span><span class="unit-label">min</span></div>
+          <div class="countdown-sep">:</div>
+          <div class="countdown-unit"><span class="num" id="xm-secs">--</span><span class="unit-label">sec</span></div>
+        </div>
+        <div class="countdown-sub">Last chance to join: Friday 18th December 2026, 6pm UK time</div>
+        <a href="https://digitaldais.thrivecart.com/bizfluencer/" class="btn btn-primary">Enrol now</a>
+      </div>
+    </div>
     <div class="pricing-grid reveal">
       <div>
         <!-- Launch offer (auto-hides after the deadline) -->
@@ -1955,6 +2054,24 @@
       <h2>The honest answers</h2>
     </div>
     <div class="faq-list reveal" id="faq-list">
+      <div class="faq-item xmas-only">
+        <button class="faq-question" aria-expanded="false">
+          How does the Christmas offer work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Join today and you get full access straight away - the modules, the custom AI tools, Slack and the live calls. Your 12 weeks of support just don't start counting until Tuesday 5th January, so all the time before that is free. That's <span data-xmas-free>6 weeks</span> if you join today, and it goes down a day, every day. Everyone who joins in time is covered until 13th April 2027, so you can lock in your Q1 support now. I support you live as normal until my last working day on Friday 18th December, and I'm away from 19th December to 4th January, so I add 2 weeks onto the end of your support to give that time back. The offer ends on Friday 18th December at 6pm UK time.
+        </div>
+      </div>
+      <div class="faq-item xmas-only">
+        <button class="faq-question" aria-expanded="false">
+          What happens while you're away?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          My last working day of the year is Friday 18th December and I'm back on Tuesday 5th January. From 19th December to 4th January there are no live calls and no Slack reviews. Your modules and the custom AI tools stay open, so you can keep going at your own pace. You don't lose that time, because I add 2 weeks onto the end of your support to give it back. Your 12 weeks officially start counting on 5th January, and everything runs as normal from there.
+        </div>
+      </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           I've bought courses before and they haven't worked. What makes this different?
@@ -2082,6 +2199,7 @@
       <p class="offer-on"><strong>Launch price:</strong> £1047 (saving £200) plus a bonus 1:1 Accelerate Call worth £449</p>
       <p class="offer-on"><strong>Launch offer ends:</strong> Sunday 8 November 2026, 11:59pm UK time</p>
       <p class="offer-off"><strong>Investment:</strong> £1247</p>
+      <p class="xmas-only"><strong>Christmas offer:</strong> join by 6pm on Friday 18th December and get <span data-xmas-free>6 weeks</span> free if you join today. Your 12 weeks of support start counting on 5th January, and you're covered until 13th April 2027</p>
       <p><strong>Start:</strong> straight away - instant access</p>
       <p><strong>Payment plans:</strong> 3 months or 6 months available (or receive a bonus 1:1 call when you pay in full)</p>
     </div>
@@ -2272,7 +2390,37 @@
       a.classList.remove('btn-disabled');
     });
   }
+  // Christmas offer: free time = whole days from today (UK date) to the programme start, 5th January 2027
+  function xmasFreeDays() {
+    var t;
+    try { t = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/London' }); } catch (e) { t = null; }
+    var p = t && /^\d{4}-\d{2}-\d{2}$/.test(t) ? t.split('-').map(Number) : null;
+    var now = new Date();
+    var today = p ? Date.UTC(p[0], p[1] - 1, p[2]) : Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.round((Date.UTC(2027, 0, 5) - today) / 86400000));
+  }
+  function xmasLabel(days) {
+    var w = Math.floor(days / 7), d = days % 7, out = [];
+    if (w > 0) out.push(w + (w === 1 ? ' week' : ' weeks'));
+    if (d > 0 || w === 0) out.push(d + (d === 1 ? ' day' : ' days'));
+    return out.join(' ');
+  }
+  var xmasLast = '';
+  function tickXmas() {
+    var label = xmasLabel(xmasFreeDays());
+    if (label !== xmasLast) {
+      xmasLast = label;
+      document.querySelectorAll('[data-xmas-free]').forEach(function (el) { el.textContent = label; });
+    }
+    var root = document.documentElement, now = Date.now();
+    var after18 = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/London' }) > '2026-12-18';
+    root.classList.toggle('xmas-after18', after18);
+    if (now > BZ.xmasEnd) { root.classList.remove('xmas-on'); return; }
+    renderCountdown(BZ.xmasEnd, ['xm-days', 'xm-hours', 'xm-mins', 'xm-secs']);
+    renderCountdown(BZ.xmasEnd, ['pb-days', 'pb-hours', 'pb-mins', 'pb-secs']);
+  }
   function tickTimers() {
+    tickXmas();
     var now = Date.now();
     var root = document.documentElement;
     if (now < doorsOpen) {
@@ -2282,7 +2430,6 @@
       root.classList.remove('pre-open');
       unlockButtons();
       renderCountdown(offerDeadline, ['fa-days', 'fa-hours', 'fa-mins', 'fa-secs']);
-      renderCountdown(offerDeadline, ['pb-days', 'pb-hours', 'pb-mins', 'pb-secs']);
     }
     if (now > offerDeadline) { root.classList.add('offer-ended'); }
   }
